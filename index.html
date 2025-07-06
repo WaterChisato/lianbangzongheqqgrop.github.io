@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QQ群跳转工具</title>
+    <style>
+        /* 基础样式 - 精简现代设计 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .container {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            max-width: 400px;
+            width: 90%;
+        }
+        h1 {
+            margin-bottom: 25px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+        button {
+            padding: 12px 30px;
+            background-color: #409EFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-weight: 500;
+        }
+        button:hover {
+            background-color: #3083e0;
+        }
+        .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #666;
+            width: 100%;
+            text-align: center;
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="pageTitle">点击按钮跳转QQ群</h1>
+        <button id="jumpButton">立即跳转</button>
+    </div>
+    <div class="footer">联邦综合 X 水喝千束</div>
+
+    <script>
+        // 语言检测函数 - 识别中文/英文系统
+        function detectLanguage() {
+            const lang = (navigator.language || navigator.userLanguage).toLowerCase();
+            return lang.startsWith('zh') ? 'zh' : 'en';
+        }
+
+        // 配置不同语言的QQ群链接（需替换为实际链接）
+        const qqGroupLinks = {
+            zh: [
+                'https://qm.qq.com/q/md2C7mt9ao',
+                'https://pd.qq.com/s/addrhadcg?b=9',
+                'http://waterchisato.github.io',
+                'https://qm.qq.com/q/aR0XPvT1Vm'
+            ],
+            en: 
+                'https://discord.gg/GraDEVwGcJ', // 英文QQ群链接2
+                'https://youtube.com/@planareal?si=y9mib0E4pqEKthGw'  // 英文QQ群链接3
+            ]
+        };
+
+        // 配置不同语言的界面文本
+        const pageTexts = {
+            zh: {
+                title: '点击按钮跳转QQ群',
+                button: '立即跳转'
+            },
+            en: {
+                title: 'YouTube Or Discord',
+                button: 'Jump Now'
+            }
+        };
+
+        // 初始化页面
+        function initPage() {
+            const currentLang = detectLanguage();
+            document.documentElement.lang = currentLang;
+            
+            // 更新页面文本
+            document.getElementById('pageTitle').textContent = pageTexts[currentLang].title;
+            document.getElementById('jumpButton').textContent = pageTexts[currentLang].button;
+            
+            // 绑定跳转事件
+            document.getElementById('jumpButton').addEventListener('click', function() {
+                const links = qqGroupLinks[currentLang];
+                const randomIndex = Math.floor(Math.random() * links.length);
+                window.location.href = links[randomIndex];
+            });
+        }
+
+        // 页面加载后初始化
+        window.onload = initPage;
+    </script>
+</body>
+</html>
